@@ -1,0 +1,94 @@
+package br.ulbra.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+public class UsuarioDAO {
+
+    private GerenciadorConexao gerenciador;
+
+    public UsuarioDAO() {
+        this.gerenciador = GerenciadorConexao.getInstancia();
+    }
+
+    public boolean autenticar(String email, String senha) {
+        String sql = "SELECT * from tb_usuario WHERE email_usu = ? and senha_usu = ? and ativo_usu";
+        try {
+            PreparedStatement stmt = gerenciador.getConexao().prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return false;
+    }
+
+    public void adicionarUsuario(String nome, String email, String senha, String data, int ativo) {
+        String sql = "INSERT into tb_usuario (nome_usu,email_usu,enha_usu,dataNasc_usu,ativo_usu)"
+                + "VALUES (?,?,?,?,?)";
+
+        try {
+            PreparedStatement stmt = gerenciador.getConexao().prepareStatement(sql);
+            stmt.setString(1, nome);
+            stmt.setString(2, email);
+            stmt.setString(3, senha);
+            stmt.setString(4, data);
+            stmt.setInt(5, ativo);
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Usuario: " + nome + "Inserido com sucesso!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERRO: " + e.getMessage());
+        }
+
+    }
+
+    public List<Usuario> read() {
+        String sql = "SELECT * FROM tb_usuario";
+        List<Usuario> usuarios = new ArrayList<>();
+
+        Connection con = gerenciador.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Usuario usuario = new Usuario();
+
+                usuario.setPkUsuario(rs.getInt("pk_usuario"));
+                usuario.setNomeUsu(rs.getString("nome_usu"));
+                usuario.setEmailUsu(rs.getString("email_usu"));
+                usuario.setSenhaUsu(rs.getString("senha_usu"));
+                usuario.setDataNascUsu(rs.getString("dataNasc_usu"));
+                usuario.setAtivoUsu(rs.getInt("ativo_usu"));
+
+                usuarios.add(usuario);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            GerenciadorConexao.closeConnection(con, stmt, rs);
+        }
+        return usuarios;
+
+    }
+
+}
