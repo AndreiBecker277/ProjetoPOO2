@@ -26,6 +26,9 @@ public class UsuarioController {
         }
 
     }
+    public boolean adicionarUsuario(String nome,String email,String senha,String DataNasc,int ativo){
+    return usuarioDAO.adicionarUsuario(nome, email, senha, DataNasc, ativo);
+    }
 }
 
 

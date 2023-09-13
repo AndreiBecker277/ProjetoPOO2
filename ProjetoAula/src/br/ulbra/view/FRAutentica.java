@@ -6,6 +6,7 @@
 package br.ulbra.view;
 
 import br.ulbra.controller.UsuarioController;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -79,6 +80,12 @@ public class FRAutentica extends javax.swing.JFrame {
             }
         });
 
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -143,6 +150,10 @@ public class FRAutentica extends javax.swing.JFrame {
     }//GEN-LAST:event_btEntrarActionPerformed
 
     private void btEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btEntrarMouseClicked
+        logar();
+
+    }//GEN-LAST:event_btEntrarMouseClicked
+    private void logar() {
         UsuarioController controller = new UsuarioController();
         char[] senha = txtSenha.getPassword();
 
@@ -150,7 +161,12 @@ public class FRAutentica extends javax.swing.JFrame {
             this.dispose();
             new FRMenu().setVisible(true);
         }
-    }//GEN-LAST:event_btEntrarMouseClicked
+    }
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            logar();
+        }
+    }//GEN-LAST:event_txtSenhaKeyPressed
 
     /**
      * @param args the command line arguments
