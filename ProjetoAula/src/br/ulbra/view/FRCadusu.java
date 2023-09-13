@@ -5,6 +5,11 @@
  */
 package br.ulbra.view;
 
+import br.ulbra.controller.UsuarioController;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aluno.saolucas
@@ -44,10 +49,10 @@ public class FRCadusu extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtSenha = new javax.swing.JPasswordField();
         txtSenhaRepetir = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btSalvarMouseClicked = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadatros Usuarios");
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
@@ -84,16 +89,26 @@ public class FRCadusu extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Ativo\n");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Save.png"))); // NOI18N
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btSalvarMouseClicked.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Save.png"))); // NOI18N
+        btSalvarMouseClicked.setText("Salvar");
+        btSalvarMouseClicked.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btSalvarMouseClickedMouseClicked(evt);
+            }
+        });
+        btSalvarMouseClicked.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btSalvarMouseClickedActionPerformed(evt);
             }
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Cancel.png"))); // NOI18N
         jButton2.setText("Cancelar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,7 +145,7 @@ public class FRCadusu extends javax.swing.JFrame {
                                 .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtSenhaRepetir, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btSalvarMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(60, Short.MAX_VALUE))
@@ -154,9 +169,9 @@ public class FRCadusu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +186,7 @@ public class FRCadusu extends javax.swing.JFrame {
                 .addComponent(txtSenhaRepetir, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btSalvarMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE))
                 .addGap(56, 56, 56))
         );
@@ -190,9 +205,60 @@ public class FRCadusu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btSalvarMouseClickedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarMouseClickedActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btSalvarMouseClickedActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
+    private boolean verificarCampos() {
+        if (txtNome.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome' Em branco!");
+            return false;
+        }
+        if (!txtNome.getText().matches("^[\\p{L} ]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome' possui caracteres Invalios");
+            return false;
+        }
+
+        if (txtEmail.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Email' Em branco!");
+            return false;
+        }
+        if (!txtEmail.getText().matches("^[a-zA-Z._]+@[a-zA-z._]+.[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Email' possui formato Invalido");
+            return false;
+        }
+
+        if (!txtDataNasc.getText().matches("^[0-9]{2}/[0-9]{2}/[0-9]{4}$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Data Nascimento' possui formato inválido"
+                    + " Ex:01/01/2000");
+            return false;
+        }
+        char[] senha = txtSenha.getPassword();
+        if (new String(senha).length() < 8) {
+            JOptionPane.showMessageDialog(null, "Campo 'senha' Deve ser maior que 8 digitos");
+            return false;
+        }
+        if (!new String(senha).equals(new String(txtSenhaRepetir.getPassword()))) {
+            JOptionPane.showMessageDialog(null, "As senhas não são iguais");
+            return false;
+        }
+        return true;
+    }
+
+    private void btSalvarMouseClickedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarMouseClickedMouseClicked
+        if (!verificarCampos()) {
+            return;
+        }
+        //Salvar
+
+        UsuarioController controller = new UsuarioController();
+    
+                 
+    
+    }//GEN-LAST:event_btSalvarMouseClickedMouseClicked
 
     /**
      * @param args the command line arguments
@@ -230,8 +296,8 @@ public class FRCadusu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSalvarMouseClicked;
     private javax.swing.JCheckBox chkAtivo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

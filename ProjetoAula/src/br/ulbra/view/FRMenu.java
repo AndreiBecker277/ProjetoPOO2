@@ -56,17 +56,17 @@ public class FRMenu extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(112, 112, 112)
                 .addComponent(jLabel1)
-                .addGap(127, 127, 127))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(90, 90, 90)
+                .addGap(76, 76, 76)
                 .addComponent(jLabel1)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Cadastros");
@@ -103,7 +103,12 @@ public class FRMenu extends javax.swing.JFrame {
         });
         MiConUsuario.add(jMenuItem5);
 
-        jMenuItem6.setText("???");
+        jMenuItem6.setText("Alterar Usuarios");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         MiConUsuario.add(jMenuItem6);
 
         jMenuBar1.add(MiConUsuario);
@@ -132,16 +137,20 @@ public class FRMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MiUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiUsuarioActionPerformed
-        // TODO add your handling code here:
+       new FRCadusu().setVisible(true);
     }//GEN-LAST:event_MiUsuarioActionPerformed
 
     private void MiSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiSairActionPerformed
-        // TODO add your handling code here:
+      this.dispose();
     }//GEN-LAST:event_MiSairActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+       new FRConsu().setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+       
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments

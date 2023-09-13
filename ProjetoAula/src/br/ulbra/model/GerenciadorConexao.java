@@ -26,8 +26,7 @@ public class GerenciadorConexao {
 
         try {
             conexao = DriverManager.getConnection(URL, USER, PASSWORD);
-            JOptionPane.showMessageDialog(null,
-                    "Conexao com o banco de dados estabelecido!");
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage().toString());
         }
