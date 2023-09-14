@@ -5,6 +5,11 @@
  */
 package br.ulbra.view;
 
+import br.ulbra.controller.UsuarioController;
+import br.ulbra.model.Usuario;
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aluno.saolucas
@@ -70,6 +75,11 @@ public class FRConsu extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tabela);
 
         BtPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Pesquisa.png"))); // NOI18N
+        BtPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtPesquisaMouseClicked(evt);
+            }
+        });
         BtPesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtPesquisaActionPerformed(evt);
@@ -146,6 +156,24 @@ public class FRConsu extends javax.swing.JFrame {
     private void BtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtPesquisaActionPerformed
+ private void pesquisar(){
+          DefaultTableModel modelo = (DeafaultTableModel) tabela.getMode1();
+          modelo.SetNumRows(0);
+          UsuarioController controller = new UsuarioController();
+          
+          for(Usuario usu : controller.readForDesc(txtFiltro.getText())){
+              Object[] linha = {usu.getPkusuario()
+              ,usu.getNomeUsu()
+              ,usu.getEmailUsu()
+              ,usu.getDataNascUsu()
+              ,usu.ativoToString()};
+              modelo.addRow(linha);
+          
+          }
+      }
+    private void BtPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtPesquisaMouseClicked
+   pesquisar();
+    }//GEN-LAST:event_BtPesquisaMouseClicked
 
     /**
      * @param args the command line arguments
