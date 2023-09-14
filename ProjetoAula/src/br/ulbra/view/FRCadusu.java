@@ -5,6 +5,7 @@
  */
 package br.ulbra.view;
 
+import br.ulbra.Utils.Utils;
 import br.ulbra.controller.UsuarioController;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -255,9 +256,13 @@ public class FRCadusu extends javax.swing.JFrame {
         //Salvar
 
         UsuarioController controller = new UsuarioController();
-    
-                 
-    
+        String senha = new String(txtSenha.getPassword());
+        if (controller.adicionarUsuario(txtNome.getText(), txtEmail.getText(), senha,
+                txtDataNasc.getText(), Utils.salvarBoolean(chkAtivo.isSelected()))) {
+            this.dispose();
+        }
+
+
     }//GEN-LAST:event_btSalvarMouseClickedMouseClicked
 
     /**

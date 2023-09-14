@@ -36,7 +36,7 @@ public class UsuarioDAO {
     }
 
     public boolean adicionarUsuario(String nome, String email, String senha, String data, int ativo) {
-        String sql = "INSERT into tb_usuario (nome_usu,email_usu,enha_usu,dataNasc_usu,ativo_usu)"
+        String sql = "INSERT into tb_Usuario (nome_usu,email_usu,senha_usu,dataNasc_usu,ativo_usu)"
                 + "VALUES (?,?,?,?,?)";
 
         try {
@@ -87,9 +87,44 @@ public class UsuarioDAO {
 
         } finally {
             GerenciadorConexao.closeConnection(con, stmt, rs);
+
+        }
+        return usuarios;
+    }
+
+    public List<Usuario> readForDesc(String desc) {
+        String sql = "SELECT * FROM tb_Usuario where nome_usu Like ?";
+        GerenciadorConexao gerenciador = GerenciadorConexao.getInstancia();
+        Connection con = gerenciador.getConexao();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, "%" + desc + "%");
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                
+                Usuario usuario = new Usuario();
+
+                usuario.setPkUsuario(rs.getInt("pk_usuario"));
+                usuario.setNomeUsu(rs.getString("nome_usu"));
+                usuario.setEmailUsu(rs.getString("email_usu"));
+                usuario.setSenhaUsu(rs.getString("senha_usu"));
+                usuario.setDataNascUsu(rs.getString("dataNasc_usu"));
+                usuario.setAtivoUsu(rs.getInt("ativo_usu"));
+                usuarios.add(usuario);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+
+        } finally {
+            GerenciadorConexao.closeConnection(con, stmt, rs);
         }
         return usuarios;
 
     }
-
 }

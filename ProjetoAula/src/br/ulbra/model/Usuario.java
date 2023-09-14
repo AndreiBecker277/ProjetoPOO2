@@ -61,6 +61,13 @@ public class Usuario {
     public void setSenhaUsu(String senha_usu) {
         this.senha_usu = senha_usu;
     }
+    
+    public String ativoToString(){
+    if(this.ativo_usu == 1)
+        return "Ativo";
+    else
+        return "Inativo";
+    }
 
     @Override
     public String toString() {

@@ -5,7 +5,9 @@
  */
 package br.ulbra.controller;
 
+import br.ulbra.model.Usuario;
 import br.ulbra.model.UsuarioDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class UsuarioController {
@@ -28,6 +30,9 @@ public class UsuarioController {
     }
     public boolean adicionarUsuario(String nome,String email,String senha,String DataNasc,int ativo){
     return usuarioDAO.adicionarUsuario(nome, email, senha, DataNasc, ativo);
+    }
+    public List<Usuario> readForDesc(String desc){
+    return usuarioDAO.readForDesc(desc);
     }
 }
 
