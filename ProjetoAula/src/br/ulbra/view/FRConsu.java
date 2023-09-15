@@ -8,6 +8,7 @@ package br.ulbra.view;
 import br.ulbra.controller.UsuarioController;
 import br.ulbra.model.Usuario;
 import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
+import java.awt.event.KeyEvent;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +22,7 @@ public class FRConsu extends javax.swing.JFrame {
      */
     public FRConsu() {
         initComponents();
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -60,6 +61,11 @@ public class FRConsu extends javax.swing.JFrame {
                 txtFiltroActionPerformed(evt);
             }
         });
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyPressed(evt);
+            }
+        });
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,6 +78,11 @@ public class FRConsu extends javax.swing.JFrame {
                 "COD", "Nome", "Email", "Data Nascimento", "Ativo"
             }
         ));
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
 
         BtPesquisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Pesquisa.png"))); // NOI18N
@@ -156,24 +167,41 @@ public class FRConsu extends javax.swing.JFrame {
     private void BtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtPesquisaActionPerformed
- private void pesquisar(){
-          DefaultTableModel modelo = (DeafaultTableModel) tabela.getMode1();
-          modelo.SetNumRows(0);
-          UsuarioController controller = new UsuarioController();
-          
-          for(Usuario usu : controller.readForDesc(txtFiltro.getText())){
-              Object[] linha = {usu.getPkusuario()
-              ,usu.getNomeUsu()
-              ,usu.getEmailUsu()
-              ,usu.getDataNascUsu()
-              ,usu.ativoToString()};
-              modelo.addRow(linha);
-          
-          }
-      }
+    private void pesquisar() {
+        DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
+        modelo.setNumRows(0);
+        UsuarioController controller = new UsuarioController();
+
+        for (Usuario usu : controller.readForDesc(txtFiltro.getText())) {
+            Object[] linha = {usu.getPkusuario(),
+                 usu.getNomeUsu(),
+                 usu.getEmailUsu(),
+                 usu.getDataNascUsu(),
+                 usu.ativoToString()};
+            modelo.addRow(linha);
+
+        }
+    }
     private void BtPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtPesquisaMouseClicked
-   pesquisar();
+        pesquisar();
     }//GEN-LAST:event_BtPesquisaMouseClicked
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        if (tabela.getSelectedRow() != -1) {
+            int pk = Integer.parseInt(
+                tabela.getValueAt(tabela.getSelectedRow(), 0).toString()
+            );
+            FRUpdUsu telaUPD = new FRUpdUsu();
+            telaUPD.setPkUsuario(pk);
+            telaUPD.setVisible(true);
+        }
+    }//GEN-LAST:event_tabelaMouseClicked
+
+    private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
+  if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pesquisar();
+  }
+    }//GEN-LAST:event_txtFiltroKeyPressed
 
     /**
      * @param args the command line arguments
