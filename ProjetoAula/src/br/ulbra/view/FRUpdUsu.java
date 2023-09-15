@@ -5,11 +5,22 @@
  */
 package br.ulbra.view;
 
+import br.ulbra.Utils.Utils;
+import br.ulbra.controller.UsuarioController;
+import br.ulbra.model.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aluno.saolucas
  */
 public class FRUpdUsu extends javax.swing.JFrame {
+
+    private int pkUsuario;
+
+    public void setPkUsuario(int pk) {
+        this.pkUsuario = pk;
+    }
 
     /**
      * Creates new form FRUpdUsu
@@ -45,12 +56,21 @@ public class FRUpdUsu extends javax.swing.JFrame {
         BtAlterar = new javax.swing.JButton();
         BtExcluir = new javax.swing.JButton();
         BtVoltar = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        txtSenhaRepetir = new javax.swing.JPasswordField();
+        jLabel11 = new javax.swing.JLabel();
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Nome");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
 
@@ -93,12 +113,37 @@ public class FRUpdUsu extends javax.swing.JFrame {
 
         BtAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Edit.png"))); // NOI18N
         BtAlterar.setText("Alterar");
+        BtAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtAlterarMouseClicked(evt);
+            }
+        });
 
         BtExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Lixo.png"))); // NOI18N
         BtExcluir.setText("Excluir");
 
         BtVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Voltar.png"))); // NOI18N
         BtVoltar.setText("Voltar");
+        BtVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtVoltarMouseClicked(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Código");
+
+        txtCodigo.setEditable(false);
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Repetir Senha");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,18 +159,21 @@ public class FRUpdUsu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEmail)
                             .addComponent(txtsenha)
                             .addComponent(txtNome)
+                            .addComponent(txtSenhaRepetir)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel1)
-                                        .addGap(38, 38, 38)
+                                        .addGap(34, 34, 34)
                                         .addComponent(jLabel2))
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6)
@@ -138,21 +186,30 @@ public class FRUpdUsu extends javax.swing.JFrame {
                                             .addComponent(jLabel9)
                                             .addComponent(checkAtivo)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
+                                        .addGap(13, 13, 13)
                                         .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
+                                        .addGap(32, 32, 32)
                                         .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 39, Short.MAX_VALUE)))
-                        .addGap(101, 101, 101))))
+                                .addGap(0, 42, Short.MAX_VALUE)))
+                        .addGap(101, 101, 101))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel11))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(40, 40, 40)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,19 +229,27 @@ public class FRUpdUsu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtsenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)))
-                .addComponent(BtVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                                .addComponent(txtSenhaRepetir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addComponent(BtVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(23, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(BtAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BtExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(35, 35, 35))))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -204,6 +269,84 @@ public class FRUpdUsu extends javax.swing.JFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        UsuarioController controller = new UsuarioController();
+        Usuario usu = controller.readForPk(pkUsuario);
+
+        String codigo = String.valueOf(usu.getPkusuario());
+        txtCodigo.setText(codigo);
+        txtNome.setText(usu.getNomeUsu());
+        txtEmail.setText(usu.getEmailUsu());
+        txtDataNasc.setText(usu.getDataNascUsu());
+        txtsenha.setText(usu.getSenhaUsu());
+        checkAtivo.setSelected(usu.getAtivoUsu() == 1);
+
+
+    }//GEN-LAST:event_formWindowActivated
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void BtVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtVoltarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_BtVoltarMouseClicked
+    private boolean verificarCampos() {
+        if (txtNome.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome' Em branco!");
+            return false;
+        }
+        if (!txtNome.getText().matches("^[\\p{L} ]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome' possui caracteres Invalios");
+            return false;
+        }
+
+        if (txtEmail.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Email' Em branco!");
+            return false;
+        }
+        if (!txtEmail.getText().matches("^[a-zA-Z._]+@[a-zA-z._]+.[a-zA-Z]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Email' possui formato Invalido");
+            return false;
+        }
+
+        if (!txtDataNasc.getText().matches("^[0-9]{2}/[0-9]{2}/[0-9]{4}$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Data Nascimento' possui formato inválido"
+                    + " Ex:01/01/2000");
+            return false;
+        }
+        char[] senha = txtsenha.getPassword();
+        if (new String(senha).length() < 8) {
+            JOptionPane.showMessageDialog(null, "Campo 'senha' Deve ser maior que 8 digitos");
+            return false;
+        }
+        if (!new String(senha).equals(new String(txtSenhaRepetir.getPassword()))) {
+            JOptionPane.showMessageDialog(null, "As senhas não são iguais");
+            return false;
+        }
+        return true;
+    }
+    private void BtAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtAlterarMouseClicked
+        if (!verificarCampos()) {
+            return;
+        }
+        //Salvar
+
+        UsuarioController controller = new UsuarioController();
+        String senha = new String(txtsenha.getPassword());
+        Usuario usuario = new Usuario();
+        usuario.setPkUsuario(pkUsuario);
+        usuario.setNomeUsu(txtNome.getText());
+        usuario.setEmailUsu(txtEmail.getText());
+        usuario.setDataNascUsu(txtDataNasc.getText());
+        usuario.setAtivoUsu(Utils.salvarBoolean(checkAtivo.isSelected()));
+        usuario.setSenhaUsu(senha);
+
+        if (controller.UpdateUsuario(usuario)) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_BtAlterarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -246,6 +389,8 @@ public class FRUpdUsu extends javax.swing.JFrame {
     private javax.swing.JButton BtVoltar;
     private javax.swing.JCheckBox checkAtivo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -255,9 +400,11 @@ public class FRUpdUsu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JPasswordField txtSenhaRepetir;
     private javax.swing.JPasswordField txtsenha;
     // End of variables declaration//GEN-END:variables
 }
