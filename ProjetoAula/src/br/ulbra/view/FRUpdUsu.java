@@ -121,6 +121,11 @@ public class FRUpdUsu extends javax.swing.JFrame {
 
         BtExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Lixo.png"))); // NOI18N
         BtExcluir.setText("Excluir");
+        BtExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtExcluirMouseClicked(evt);
+            }
+        });
 
         BtVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Voltar.png"))); // NOI18N
         BtVoltar.setText("Voltar");
@@ -347,6 +352,15 @@ public class FRUpdUsu extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_BtAlterarMouseClicked
+
+    private void BtExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtExcluirMouseClicked
+       int reposta = JOptionPane.showConfirmDialog(null, "Deseja Excluir Usuario? ",
+               "Confirmação",JOptionPane.YES_NO_OPTION);
+        UsuarioController controller = new UsuarioController();
+        if(controller.ExcluirUsuario(pkUsuario)){
+            this.dispose();
+        }
+    }//GEN-LAST:event_BtExcluirMouseClicked
 
     /**
      * @param args the command line arguments

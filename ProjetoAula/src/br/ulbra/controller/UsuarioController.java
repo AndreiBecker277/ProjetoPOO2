@@ -43,4 +43,7 @@ public class UsuarioController {
     public boolean UpdateUsuario(Usuario u) {
         return usuarioDAO.UpdateUsuario(u);
     }
+    public boolean ExcluirUsuario(int pkUsuario) {
+        return usuarioDAO.ExcluirUsuario(pkUsuario);
+    }
 }

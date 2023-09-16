@@ -175,7 +175,7 @@ public class UsuarioDAO {
                     + "email_usu = ?,"
                     + "senha_usu = ?,"
                     + "dataNasc_usu = ?,"
-                    + "ativo_usu = ?,"
+                    + "ativo_usu = ? "
                     + "WHERE pk_usuario = ?");
 
             stmt.setString(1, u.getNomeUsu());
@@ -198,5 +198,28 @@ public class UsuarioDAO {
           return false;
 
     }
-    
+     public boolean ExcluirUsuario(int pkUsuario) {
+
+        GerenciadorConexao gerenciador = GerenciadorConexao.getInstancia();
+        Connection con = gerenciador.getConexao();
+        PreparedStatement stmt = null;
+       
+        try {
+            stmt = con.prepareStatement("DELETE FROM tb_Usuario WHERE pk_usuario = ?");
+           
+            stmt.setInt(1, pkUsuario);
+
+            stmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Excluido Com Sucesso");
+          return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir" + ex);
+
+        } finally {
+            GerenciadorConexao.closeConnection(con, stmt);
+        }
+          return false;
+
+    }
 }

@@ -116,6 +116,11 @@ public class FRMenu extends javax.swing.JFrame {
         jMenu3.setText("Ajuda");
 
         MiSobre.setText("Sobre");
+        MiSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MiSobreActionPerformed(evt);
+            }
+        });
         jMenu3.add(MiSobre);
 
         jMenuBar1.add(jMenu3);
@@ -151,6 +156,10 @@ public class FRMenu extends javax.swing.JFrame {
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
        
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void MiSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiSobreActionPerformed
+         new FRSobre().setVisible(true);
+    }//GEN-LAST:event_MiSobreActionPerformed
 
     /**
      * @param args the command line arguments
