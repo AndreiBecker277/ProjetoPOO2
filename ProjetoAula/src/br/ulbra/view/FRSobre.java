@@ -13,14 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author aluno.saolucas
  */
-public class FRSobre extends javax.swing.JFrame {
+public class FRSobre extends javax.swing.JDialog {
 
     /**
-     * Creates new form FRSobre
+     * Creates new form FRSobre_
      */
-    public FRSobre() {
+    public FRSobre(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -32,7 +32,6 @@ public class FRSobre extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtVoltar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -42,15 +41,7 @@ public class FRSobre extends javax.swing.JFrame {
         btVoltar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
 
-        BtVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Voltar.png"))); // NOI18N
-        BtVoltar.setText("Voltar");
-        BtVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtVoltarMouseClicked(evt);
-            }
-        });
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
 
@@ -149,22 +140,18 @@ public class FRSobre extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtVoltarMouseClicked
-     
-    }//GEN-LAST:event_BtVoltarMouseClicked
-
     private void linkHubMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linkHubMouseClicked
-     try{
-      Desktop desktop = Desktop.getDesktop();
-      URI uri = new URI("https://github.com/AndreiBecker277");
-      desktop.browse(uri);      
-     }catch (Exception e){
-         JOptionPane.showMessageDialog(null, e);
-     }
+        try{
+            Desktop desktop = Desktop.getDesktop();
+            URI uri = new URI("https://github.com/AndreiBecker277");
+            desktop.browse(uri);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }//GEN-LAST:event_linkHubMouseClicked
 
     private void btVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVoltarMouseClicked
-      this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btVoltarMouseClicked
 
     /**
@@ -193,17 +180,24 @@ public class FRSobre extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FRSobre.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FRSobre().setVisible(true);
+                FRSobre dialog = new FRSobre(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtVoltar;
     private javax.swing.JButton btVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
