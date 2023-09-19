@@ -14,18 +14,17 @@ import javax.swing.JOptionPane;
  *
  * @author aluno.saolucas
  */
-public class FRUpdUsu extends javax.swing.JFrame {
-
+public class FRUpUsu extends javax.swing.JDialog {
     private int pkUsuario;
 
     public void setPkUsuario(int pk) {
         this.pkUsuario = pk;
-    }
-
+    }   
     /**
-     * Creates new form FRUpdUsu
+     * Creates new form FRUpUsu_
      */
-    public FRUpdUsu() {
+    public FRUpUsu(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -38,7 +37,6 @@ public class FRUpdUsu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,10 +58,6 @@ public class FRUpdUsu extends javax.swing.JFrame {
         txtCodigo = new javax.swing.JTextField();
         txtSenhaRepetir = new javax.swing.JPasswordField();
         jLabel11 = new javax.swing.JLabel();
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Nome");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -274,30 +268,7 @@ public class FRUpdUsu extends javax.swing.JFrame {
     private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEmailActionPerformed
-
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        UsuarioController controller = new UsuarioController();
-        Usuario usu = controller.readForPk(pkUsuario);
-
-        String codigo = String.valueOf(usu.getPkusuario());
-        txtCodigo.setText(codigo);
-        txtNome.setText(usu.getNomeUsu());
-        txtEmail.setText(usu.getEmailUsu());
-        txtDataNasc.setText(usu.getDataNascUsu());
-        txtsenha.setText(usu.getSenhaUsu());
-        checkAtivo.setSelected(usu.getAtivoUsu() == 1);
-
-
-    }//GEN-LAST:event_formWindowActivated
-
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void BtVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtVoltarMouseClicked
-        this.dispose();
-    }//GEN-LAST:event_BtVoltarMouseClicked
-    private boolean verificarCampos() {
+   private boolean verificarCampos() {
         if (txtNome.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Nome' Em branco!");
             return false;
@@ -354,13 +325,25 @@ public class FRUpdUsu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtAlterarMouseClicked
 
     private void BtExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtExcluirMouseClicked
-       int reposta = JOptionPane.showConfirmDialog(null, "Deseja Excluir Usuario? ",
-               "Confirmação",JOptionPane.YES_NO_OPTION);
+        int reposta = JOptionPane.showConfirmDialog(null, "Deseja Excluir Usuario? ",
+            "Confirmação",JOptionPane.YES_NO_OPTION);
         UsuarioController controller = new UsuarioController();
         if(controller.ExcluirUsuario(pkUsuario)){
             this.dispose();
         }
     }//GEN-LAST:event_BtExcluirMouseClicked
+
+    private void BtVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtVoltarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_BtVoltarMouseClicked
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
@@ -379,20 +362,28 @@ public class FRUpdUsu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FRUpdUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRUpUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FRUpdUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRUpUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FRUpdUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRUpUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FRUpdUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRUpUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FRUpdUsu().setVisible(true);
+                FRUpUsu dialog = new FRUpUsu(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -410,7 +401,6 @@ public class FRUpdUsu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

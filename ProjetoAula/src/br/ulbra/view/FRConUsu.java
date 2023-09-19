@@ -14,14 +14,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aluno.saolucas
  */
-public class FRConsu extends javax.swing.JFrame {
+public class FRConUsu extends javax.swing.JDialog {
 
     /**
-     * Creates new form FRConsu
+     * Creates new form FRConUsu_
      */
-    public FRConsu() {
+    public FRConUsu(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -172,11 +172,7 @@ public class FRConsu extends javax.swing.JFrame {
     private void txtFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFiltroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFiltroActionPerformed
-
-    private void BtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtPesquisaActionPerformed
-    private void pesquisar() {
+  private void pesquisar() {
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
         UsuarioController controller = new UsuarioController();
@@ -191,26 +187,30 @@ public class FRConsu extends javax.swing.JFrame {
 
         }
     }
-    private void BtPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtPesquisaMouseClicked
-        pesquisar();
-    }//GEN-LAST:event_BtPesquisaMouseClicked
+    private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            pesquisar();
+        }
+    }//GEN-LAST:event_txtFiltroKeyPressed
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         if (tabela.getSelectedRow() != -1) {
             int pk = Integer.parseInt(
                 tabela.getValueAt(tabela.getSelectedRow(), 0).toString()
             );
-            FRUpdUsu telaUPD = new FRUpdUsu();
+            FRUpUsu telaUPD = new FRUpUsu(null, rootPaneCheckingEnabled);
             telaUPD.setPkUsuario(pk);
             telaUPD.setVisible(true);
         }
     }//GEN-LAST:event_tabelaMouseClicked
 
-    private void txtFiltroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyPressed
-  if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            pesquisar();
-  }
-    }//GEN-LAST:event_txtFiltroKeyPressed
+    private void BtPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtPesquisaMouseClicked
+        pesquisar();
+    }//GEN-LAST:event_BtPesquisaMouseClicked
+
+    private void BtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtPesquisaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,20 +229,28 @@ public class FRConsu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FRConsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRConUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FRConsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRConUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FRConsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRConUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FRConsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRConUsu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FRConsu().setVisible(true);
+                FRConUsu dialog = new FRConUsu(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
