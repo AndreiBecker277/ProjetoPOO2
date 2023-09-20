@@ -92,8 +92,14 @@ public class UsuarioDAO {
         return usuarios;
     }
 
-    public List<Usuario> readForDesc(String desc) {
-        String sql = "SELECT * FROM tb_Usuario where nome_usu Like ?";
+    public List<Usuario> readForDesc(int tipo, String desc) {
+        String sql;
+        if (tipo == 1 || tipo == 1) {
+            sql = "SELECT * FROM tb_Usuario where nome_usu Like ?";
+        } else {
+            sql = "SELECT * FROM tb_Usuario where email_usu Like ?";
+        }
+
         GerenciadorConexao gerenciador = GerenciadorConexao.getInstancia();
         Connection con = gerenciador.getConexao();
         PreparedStatement stmt = null;
@@ -102,8 +108,11 @@ public class UsuarioDAO {
 
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, "%" + desc + "%");
-
+            if (tipo == 0 || tipo == 2) {
+                stmt.setString(1, desc + "%");
+            } else {
+                stmt.setString(1, "%" + desc + "%");
+            }
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -188,38 +197,39 @@ public class UsuarioDAO {
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Atualizado Com Sucesso");
-          return true;
+            return true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Atualizar: " + ex);
 
         } finally {
             GerenciadorConexao.closeConnection(con, stmt);
         }
-          return false;
+        return false;
 
     }
-     public boolean ExcluirUsuario(int pkUsuario) {
+
+    public boolean ExcluirUsuario(int pkUsuario) {
 
         GerenciadorConexao gerenciador = GerenciadorConexao.getInstancia();
         Connection con = gerenciador.getConexao();
         PreparedStatement stmt = null;
-       
+
         try {
             stmt = con.prepareStatement("DELETE FROM tb_Usuario WHERE pk_usuario = ?");
-           
+
             stmt.setInt(1, pkUsuario);
 
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Excluido Com Sucesso");
-          return true;
+            return true;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Excluir" + ex);
 
         } finally {
             GerenciadorConexao.closeConnection(con, stmt);
         }
-          return false;
+        return false;
 
     }
 }

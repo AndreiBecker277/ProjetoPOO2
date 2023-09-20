@@ -39,6 +39,7 @@ public class FRMenu extends javax.swing.JFrame {
         MiSair = new javax.swing.JMenuItem();
         MiConUsuario = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         MiSobre = new javax.swing.JMenuItem();
@@ -80,7 +81,7 @@ public class FRMenu extends javax.swing.JFrame {
         });
         jMenu1.add(MiUsuario);
 
-        jMenuItem3.setText("????");
+        jMenuItem3.setText("Cadastrar Produto");
         jMenu1.add(jMenuItem3);
 
         MiSair.setText("Sair");
@@ -102,6 +103,9 @@ public class FRMenu extends javax.swing.JFrame {
             }
         });
         MiConUsuario.add(jMenuItem5);
+
+        jMenuItem2.setText("Produtos");
+        MiConUsuario.add(jMenuItem2);
 
         jMenuItem6.setText("Alterar Usuarios");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +210,7 @@ public class FRMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
