@@ -82,6 +82,11 @@ public class FRMenu extends javax.swing.JFrame {
         jMenu1.add(MiUsuario);
 
         jMenuItem3.setText("Cadastrar Produto");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         MiSair.setText("Sair");
@@ -105,6 +110,11 @@ public class FRMenu extends javax.swing.JFrame {
         MiConUsuario.add(jMenuItem5);
 
         jMenuItem2.setText("Produtos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         MiConUsuario.add(jMenuItem2);
 
         jMenuItem6.setText("Alterar Usuarios");
@@ -164,6 +174,14 @@ public class FRMenu extends javax.swing.JFrame {
     private void MiSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MiSobreActionPerformed
          new FRSobre(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_MiSobreActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      new FRCadPro(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+      new FRConsuPro(this, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
