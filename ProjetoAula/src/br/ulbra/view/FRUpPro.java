@@ -5,6 +5,13 @@
  */
 package br.ulbra.view;
 
+import br.ulbra.Utils.Utils;
+import br.ulbra.controller.ProdutoController;
+import br.ulbra.controller.UsuarioController;
+import br.ulbra.model.Produto;
+import br.ulbra.model.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author S.Lucas
@@ -35,7 +42,7 @@ public class FRUpPro extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtNomePro = new javax.swing.JTextField();
-        txtCategoria = new javax.swing.JTextField();
+        txtCategoriaPro = new javax.swing.JTextField();
         txtFornecedor = new javax.swing.JTextField();
         btSalvar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
@@ -62,6 +69,11 @@ public class FRUpPro extends javax.swing.JDialog {
 
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/SalvarProduto.png"))); // NOI18N
         btSalvar.setText("Alterar");
+        btSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btSalvarMouseClicked(evt);
+            }
+        });
 
         btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Cancel.png"))); // NOI18N
         btCancelar.setText("Cancelar");
@@ -90,7 +102,7 @@ public class FRUpPro extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                                 .addComponent(btCancelar))
                             .addComponent(txtFornecedor, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCategoria, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCategoriaPro, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNomePro, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(36, 36, 36)
                         .addComponent(btVoltar)))
@@ -113,7 +125,7 @@ public class FRUpPro extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCategoriaPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -139,6 +151,52 @@ public class FRUpPro extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+ private boolean verificarCampos() {
+        if (txtNomePro.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome Produto' Em branco!");
+            return false;
+        }
+        if (!txtNomePro.getText().matches("^[\\p{L} ]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome Produto' possui caracteres Invalios");
+            return false;
+        }
+        if (txtCategoriaPro.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Categoria' Em branco!");
+            return false;
+        }
+        if (!txtCategoriaPro.getText().matches("^[\\p{L} ]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Categoria' possui caracteres Invalios");
+            return false;
+        }
+        if (txtFornecedor.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Fornecedor' Em branco!");
+            return false;
+        }
+        if (!txtFornecedor.getText().matches("^[\\p{L} ]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Fornecedor' possui caracteres Invalios");
+            return false;
+        }
+        return true;
+    }
+    private void btSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarMouseClicked
+        if (!verificarCampos()) {
+            return;
+        }
+        //Salvar
+
+        ProdutoController controller = new ProdutoController();
+
+        Produto produto = new Produto();        
+        
+        produto.setNomeProduto(txtNomePro.getText());
+        produto.setCategoria(txtCategoriaPro.getText());
+        produto.setFornecedor(txtFornecedor.getText());
+      
+
+        if (controller.UpdateProduto(produto)) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btSalvarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -192,7 +250,7 @@ public class FRUpPro extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtCategoria;
+    private javax.swing.JTextField txtCategoriaPro;
     private javax.swing.JTextField txtFornecedor;
     private javax.swing.JTextField txtNomePro;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,11 @@
  */
 package br.ulbra.view;
 
+import br.ulbra.Utils.Utils;
+import br.ulbra.controller.ProdutoController;
+import br.ulbra.controller.UsuarioController;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author S.Lucas
@@ -17,6 +22,8 @@ public class FRCadPro extends javax.swing.JDialog {
     public FRCadPro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -66,9 +73,19 @@ public class FRCadPro extends javax.swing.JDialog {
 
         btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Cancel.png"))); // NOI18N
         btCancelar.setText("Cancelar");
+        btCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btCancelarMouseClicked(evt);
+            }
+        });
 
         btSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/SalvarProduto.png"))); // NOI18N
         btSalvar.setText("Salvar");
+        btSalvar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btSalvarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,6 +167,63 @@ public class FRCadPro extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private boolean verificarCampos() {
+        if (txtNomePro.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome Produto' Em branco!");
+            return false;
+        }
+        if (!txtNomePro.getText().matches("^[\\p{L} ]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Nome Produto' possui caracteres Invalios");
+            return false;
+        }
+        if (txtCategoriaPro.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Categoria' Em branco!");
+            return false;
+        }
+        if (!txtCategoriaPro.getText().matches("^[\\p{L} ]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Categoria' possui caracteres Invalios");
+            return false;
+        }
+        if (txtFornecedor.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Fornecedor' Em branco!");
+            return false;
+        }
+        if (!txtFornecedor.getText().matches("^[\\p{L} ]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Fornecedor' possui caracteres Invalios");
+            return false;
+        }
+        if (txtQuantidade.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Quantidade Estoque' Em branco!");
+            return false;
+        }
+        if (!txtQuantidade.getText().matches("^[0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "Campo 'Quantidade Estoque' possui caracteres Invalios");
+            return false;
+        }
+        return true;
+    }
+
+
+    private void btSalvarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSalvarMouseClicked
+        if (!verificarCampos()) {
+            return;
+        }
+        //Salvar
+
+        ProdutoController controller = new ProdutoController();
+
+        if (controller.adicionarProdutos(txtNomePro.getText(), txtCategoriaPro.getText(), txtFornecedor.getText(),
+                Integer.parseInt(txtQuantidade.getText()))) {
+            this.dispose();
+        }
+
+
+    }//GEN-LAST:event_btSalvarMouseClicked
+
+    private void btCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCancelarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btCancelarMouseClicked
 
     /**
      * @param args the command line arguments
