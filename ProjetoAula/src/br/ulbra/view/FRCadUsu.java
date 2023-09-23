@@ -7,6 +7,11 @@ package br.ulbra.view;
 
 import br.ulbra.Utils.Utils;
 import br.ulbra.controller.UsuarioController;
+import br.ulbra.model.Usuario;
+import java.io.File;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,6 +54,8 @@ public class FRCadUsu extends javax.swing.JDialog {
         txtSenhaRepetir = new javax.swing.JPasswordField();
         btSalvarMouseClicked = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btEscolherImagem = new javax.swing.JButton();
+        labelFotos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[ULBRA] - Cadastro De Usuarios");
@@ -108,6 +115,16 @@ public class FRCadUsu extends javax.swing.JDialog {
             }
         });
 
+        btEscolherImagem.setText("Escolher Uma imagem de Perfil");
+        btEscolherImagem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btEscolherImagemMouseClicked(evt);
+            }
+        });
+
+        labelFotos.setAlignmentX(140.0F);
+        labelFotos.setAlignmentY(140.0F);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,9 +140,12 @@ public class FRCadUsu extends javax.swing.JDialog {
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
+                        .addComponent(btSalvarMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,11 +162,12 @@ public class FRCadUsu extends javax.swing.JDialog {
                                             .addComponent(chkAtivo))))
                                 .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtSenhaRepetir, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btSalvarMouseClicked, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btEscolherImagem)
+                            .addComponent(labelFotos, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))))
+                .addGap(42, 42, 42))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,12 +182,19 @@ public class FRCadUsu extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btEscolherImagem))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(labelFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(55, 55, 55)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
@@ -246,8 +274,14 @@ public class FRCadUsu extends javax.swing.JDialog {
 
         UsuarioController controller = new UsuarioController();
         String senha = new String(txtSenha.getPassword());
-        if (controller.adicionarUsuario(txtNome.getText(), txtEmail.getText(), senha,
-                txtDataNasc.getText(), Utils.salvarBoolean(chkAtivo.isSelected()))) {
+        Usuario usu = new Usuario();
+        usu.setNomeUsu(txtNome.getText());
+        usu.setEmailUsu(txtEmail.getText());
+        usu.setDataNascUsu(txtDataNasc.getText());
+        usu.setSenhaUsu(senha);
+        usu.setAtivoUsu(Utils.salvarBoolean(chkAtivo.isSelected()));
+        usu.setImagemUsu(labelFotos.getIcon());
+        if (controller.adicionarUsuario(usu)) {
             this.dispose();
         }
 
@@ -260,6 +294,22 @@ public class FRCadUsu extends javax.swing.JDialog {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         this.dispose();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void btEscolherImagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btEscolherImagemMouseClicked
+      JFileChooser fileChooser = new JFileChooser();
+      fileChooser.setDialogTitle("Escolha um arquivo");
+      
+      int returnValue = fileChooser.showOpenDialog(null);
+      
+      if(returnValue == JFileChooser.APPROVE_OPTION) {
+      File arquivo = fileChooser.getSelectedFile();
+       Icon icon = Utils.fileParaIcon(arquivo);
+       
+       ImageIcon iconRedimensionado = Utils.redimensionarIcon(icon,140,140);
+       
+       labelFotos.setIcon(iconRedimensionado);
+      }
+    }//GEN-LAST:event_btEscolherImagemMouseClicked
 
     /**
      * @param args the command line arguments
@@ -305,6 +355,7 @@ public class FRCadUsu extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btEscolherImagem;
     private javax.swing.JButton btSalvarMouseClicked;
     private javax.swing.JCheckBox chkAtivo;
     private javax.swing.JButton jButton2;
@@ -317,6 +368,7 @@ public class FRCadUsu extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelFotos;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;

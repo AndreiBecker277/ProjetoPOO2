@@ -5,13 +5,16 @@
         <group>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/view/FRConsuPro.java</file>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/controller/UsuarioController.java</file>
+            <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/view/FRCadUsu.java</file>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/model/Usuario.java</file>
-            <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/model/GerenciadorConexao.java</file>
-            <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/model/ProdutoDAO.java</file>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/model/UsuarioDAO.java</file>
+            <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/view/FRUpUsu.java</file>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/view/FRMenu.java</file>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/model/Produto.java</file>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/view/FRUpPro.java</file>
+            <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/view/FRConUsu.java</file>
+            <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/model/GerenciadorConexao.java</file>
+            <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/model/ProdutoDAO.java</file>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/view/FRCadPro.java</file>
             <file>file:/C:/Users/S.Lucas.DESKTOP-F4LTDRA/Documents/GitHub/ProjetoPOO2/ProjetoAula/src/br/ulbra/controller/ProdutoController.java</file>
         </group>
