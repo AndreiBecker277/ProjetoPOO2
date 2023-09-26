@@ -1,13 +1,24 @@
 
 package br.ulbra.model;
 
+import javax.swing.Icon;
+
 public class Produto {
     private int pk_produto;
     private String nomeProduto;
     private String categoria;
     private String fornecedor;
     private int quantEstoque;
+    private Icon imagemPro;
 
+    public Icon getImagemPro() {
+        return imagemPro;
+    }
+
+    public void setImagemPro(Icon imagemPro) {
+        this.imagemPro = imagemPro;
+    }    
+    
     public int getPk_produto() {
         return pk_produto;
     }

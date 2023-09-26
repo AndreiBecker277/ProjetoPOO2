@@ -30,19 +30,21 @@ public class ProdutoController {
          return produtoDAO.adicionarProdutos(nome, categoria, fornecedor, quantidade_estoque);
     }
 
-    public List<Usuario> readForDesc(int tipo ,String desc) {
-        return usuarioDAO.readForDesc(tipo,desc);
+     public List<Produto> readForDescPro(int tipo ,String desc) {
+        return produtoDAO.readForDescPro(tipo,desc);
     }
 
-    public Usuario readForPk(int pk) {
-        return usuarioDAO.readForPk(pk);
+    public Produto readForPkPro(int pk) {
+        return produtoDAO.readForPkPro(pk);
     }
+    
   public boolean UpdateProduto(Produto p) {
       return produtoDAO.UpdateProduto(p);
     }
-    public boolean ExcluirUsuario(int pkUsuario) {
-        return usuarioDAO.ExcluirUsuario(pkUsuario);
+  
+    public boolean ExcluirProduto(int pkUsuario) {
+        return produtoDAO.ExcluirProduto(pkUsuario);
     }
 }
 
-}
+
