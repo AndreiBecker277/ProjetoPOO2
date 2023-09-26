@@ -17,7 +17,13 @@ import javax.swing.JOptionPane;
  * @author S.Lucas
  */
 public class FRUpPro extends javax.swing.JDialog {
+    private int pk_produto;
 
+    public void setPk_produto(int pk_produto) {
+        this.pk_produto = pk_produto;
+    }
+    
+    
     /**
      * Creates new form FRUpPro
      */
@@ -151,7 +157,8 @@ public class FRUpPro extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- private boolean verificarCampos() {
+ 
+    private boolean verificarCampos() {
         if (txtNomePro.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Nome Produto' Em branco!");
             return false;
@@ -186,12 +193,11 @@ public class FRUpPro extends javax.swing.JDialog {
 
         ProdutoController controller = new ProdutoController();
 
-        Produto produto = new Produto();        
-        
+        Produto produto = new Produto();
+
         produto.setNomeProduto(txtNomePro.getText());
         produto.setCategoria(txtCategoriaPro.getText());
         produto.setFornecedor(txtFornecedor.getText());
-      
 
         if (controller.UpdateProduto(produto)) {
             this.dispose();

@@ -58,7 +58,7 @@ public class FRUpUsu extends javax.swing.JDialog {
         txtCodigo = new javax.swing.JTextField();
         txtSenhaRepetir = new javax.swing.JPasswordField();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        labelFotos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -145,7 +145,7 @@ public class FRUpUsu extends javax.swing.JDialog {
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Repetir Senha");
 
-        jButton1.setText("Alterar Imagem");
+        labelFotos.setText("Alterar Imagem");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -200,7 +200,7 @@ public class FRUpUsu extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(labelFotos)
                         .addGap(80, 80, 80))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -259,7 +259,7 @@ public class FRUpUsu extends javax.swing.JDialog {
                                         .addGap(35, 35, 35))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jButton1)
+                        .addComponent(labelFotos)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -324,13 +324,13 @@ public class FRUpUsu extends javax.swing.JDialog {
         UsuarioController controller = new UsuarioController();
         String senha = new String(txtsenha.getPassword());
         Usuario usuario = new Usuario();
-        usuario.setPkUsuario(pkUsuario);
-        usuario.setNomeUsu(txtNome.getText());
-        usuario.setEmailUsu(txtEmail.getText());
-        usuario.setDataNascUsu(txtDataNasc.getText());
-        usuario.setAtivoUsu(Utils.salvarBoolean(checkAtivo.isSelected()));
-        usuario.setSenhaUsu(senha);
-        usuario.setImagemUsu(labelFotos.getIcon());
+        usuario.setPk(pkUsuario);
+        usuario.setNome(txtNome.getText());
+        usuario.setEmail(txtEmail.getText());
+        usuario.setDataNasc(txtDataNasc.getText());
+        usuario.setAtivo(Utils.salvarBoolean(checkAtivo.isSelected()));
+        usuario.setSenha_usu(senha);
+        usuario.setImagem(labelFotos.getIcon());
 
         if (controller.UpdateUsuario(usuario)) {
             this.dispose();
@@ -359,13 +359,13 @@ public class FRUpUsu extends javax.swing.JDialog {
     UsuarioController controller = new UsuarioController();
         Usuario usu = controller.readForPk(pkUsuario);
        
-        String codigo = String.valueOf(usu.getPkusuario());
+        String codigo = String.valueOf(usu.getPk());
         txtCodigo.setText(codigo);
-        txtNome.setText(usu.getNomeUsu());
-        txtEmail.setText(usu.getEmailUsu());
-        txtDataNasc.setText(usu.getDataNascUsu());
-        txtsenha.setText(usu.getSenhaUsu());
-        checkAtivo.setSelected(usu.getAtivoUsu() == 1);
+        txtNome.setText(usu.getNome());
+        txtEmail.setText(usu.getEmail());
+        txtDataNasc.setText(usu.getDataNasc());
+        txtsenha.setText(usu.getSenha());
+        checkAtivo.setSelected(usu.getAtivo() == 1);
     }                    
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -420,7 +420,6 @@ public class FRUpUsu extends javax.swing.JDialog {
     private javax.swing.JButton BtExcluir;
     private javax.swing.JButton BtVoltar;
     private javax.swing.JCheckBox checkAtivo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -432,6 +431,7 @@ public class FRUpUsu extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton labelFotos;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtEmail;

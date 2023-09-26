@@ -7,85 +7,40 @@ package br.ulbra.model;
 
 import javax.swing.Icon;
 
-public class Usuario {
+public class Usuario extends Pessoa {
 
-    private int pk_usuario;
-    private String nome_usu;
-    private String email_usu;
-    private String dataNasc;
-    private int ativo_usu;
-    private String senha_usu;
-    private Icon imagemUsu;
+    
+ 
+    private String dataNasc;    
+    private String senha;
 
-    public int getPkusuario() {
-        return pk_usuario;
-    }
-
-    public void setPkUsuario(int pk_usuario) {
-        this.pk_usuario = pk_usuario;
-    }
-
-    public String getNomeUsu() {
-        return nome_usu;
-    }
-
-    public void setNomeUsu(String nome_usu) {
-        this.nome_usu = nome_usu;
-    }
-
-    public String getEmailUsu() {
-        return email_usu;
-    }
-
-    public void setEmailUsu(String email_usu) {
-        this.email_usu = email_usu;
-    }
-
-    public String getDataNascUsu() {
+    public String getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNascUsu(String dataNasc) {
+    public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
 
-    public int getAtivoUsu() {
-        return ativo_usu;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setAtivoUsu(int ativo_usu) {
-        this.ativo_usu = ativo_usu;
+    public void setSenha_usu(String senha_usu) {
+        this.senha = senha_usu;
     }
-
-    public String getSenhaUsu() {
-        return senha_usu;
-    }
-
-    public void setSenhaUsu(String senha_usu) {
-        this.senha_usu = senha_usu;
-    }
-    
-    public String ativoToString(){
-    if(this.ativo_usu == 1)
-        return "Ativo";
-    else
-        return "Inativo";
-    }
-
-    public Icon getImagemUsu() {
-        return imagemUsu;
-    }
-
-    public void setImagemUsu(Icon Imagem) {
-        this.imagemUsu = Imagem;
-    }
-    
 
     @Override
     public String toString() {
-        return "Usuario(" + "pk_usuario" + pk_usuario + ", nome_usu" + nome_usu
-                + ", email_usu" + email_usu + ", dataNasc_usu" + dataNasc + ", senha_usu" + senha_usu
-                + ", ativo_usu" + ativo_usu + ")";
+        return "Usuario{" + "dataNasc=" + getDataNasc() + ", senha=" + getSenha() + ", nome" + getNome() +", email" + getEmail() +", ativo" + getAtivo()
+                 +", imagem" + getImagem() + ", pk" + getPk()+'}';
     }
+   
+
+ 
+
+    
+
+   
 
 }
