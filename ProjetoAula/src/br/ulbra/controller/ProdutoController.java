@@ -26,8 +26,8 @@ public class ProdutoController {
 
    
 
-     public boolean adicionarProdutos(String nome, String categoria,String fornecedor,int quantidade_estoque) {
-         return produtoDAO.adicionarProdutos(nome, categoria, fornecedor, quantidade_estoque);
+     public boolean adicionarProdutos(Produto pro) {
+         return produtoDAO.adicionarProdutos(pro);
     }
 
      public List<Produto> readForDescPro(int tipo ,String desc) {

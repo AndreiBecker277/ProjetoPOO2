@@ -17,13 +17,13 @@ import javax.swing.JOptionPane;
  * @author S.Lucas
  */
 public class FRUpPro extends javax.swing.JDialog {
+
     private int pk_produto;
 
     public void setPk_produto(int pk_produto) {
         this.pk_produto = pk_produto;
     }
-    
-    
+
     /**
      * Creates new form FRUpPro
      */
@@ -51,8 +51,10 @@ public class FRUpPro extends javax.swing.JDialog {
         txtCategoriaPro = new javax.swing.JTextField();
         txtFornecedor = new javax.swing.JTextField();
         btSalvar = new javax.swing.JButton();
-        btCancelar = new javax.swing.JButton();
+        btExcluir = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
+        LabelFotos = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("-Alterar Produto-");
@@ -81,11 +83,18 @@ public class FRUpPro extends javax.swing.JDialog {
             }
         });
 
-        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Cancel.png"))); // NOI18N
-        btCancelar.setText("Cancelar");
+        btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Cancel.png"))); // NOI18N
+        btExcluir.setText("Excluir");
+        btExcluir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btExcluirMouseClicked(evt);
+            }
+        });
 
         btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Voltar.png"))); // NOI18N
         btVoltar.setText("Voltar");
+
+        jButton1.setText("AlterarImagem");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,25 +103,38 @@ public class FRUpPro extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                                    .addComponent(btExcluir))
+                                .addComponent(txtFornecedor, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCategoriaPro, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNomePro, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                                .addComponent(btCancelar))
-                            .addComponent(txtFornecedor, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtCategoriaPro, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomePro, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(36, 36, 36)
-                        .addComponent(btVoltar)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                                .addGap(36, 36, 36)
+                                .addComponent(btVoltar)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(LabelFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(65, 65, 65))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(83, 83, 83))))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,21 +147,26 @@ public class FRUpPro extends javax.swing.JDialog {
                         .addGap(23, 23, 23)
                         .addComponent(jLabel2)))
                 .addGap(26, 26, 26)
-                .addComponent(jLabel3)
-                .addGap(1, 1, 1)
-                .addComponent(txtNomePro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(1, 1, 1)
+                        .addComponent(txtNomePro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCategoriaPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCategoriaPro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(135, 135, 135)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSalvar)
-                    .addComponent(btCancelar)
+                    .addComponent(btExcluir)
                     .addComponent(btVoltar))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
@@ -157,7 +184,7 @@ public class FRUpPro extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- 
+
     private boolean verificarCampos() {
         if (txtNomePro.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Campo 'Nome Produto' Em branco!");
@@ -195,14 +222,37 @@ public class FRUpPro extends javax.swing.JDialog {
 
         Produto produto = new Produto();
 
+        produto.setPk_produto(pk_produto);
         produto.setNomeProduto(txtNomePro.getText());
         produto.setCategoria(txtCategoriaPro.getText());
         produto.setFornecedor(txtFornecedor.getText());
-
+        produto.setImagemPro(LabelFotos.getIcon());
+        
         if (controller.UpdateProduto(produto)) {
             this.dispose();
         }
+
     }//GEN-LAST:event_btSalvarMouseClicked
+ public void carregarUsuario(){
+   
+    ProdutoController controller = new ProdutoController();
+        Produto pro = controller.readForPkPro(pk_produto);
+       
+        txtNomePro.setText(pro.getNomeProduto());
+        txtCategoriaPro.setText(pro.getCategoria());
+        txtFornecedor.setText(pro.getFornecedor());
+        
+    }                    
+
+    private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
+        int reposta = JOptionPane.showConfirmDialog(null, "Deseja Excluir Usuario? ",
+                "Confirmação", JOptionPane.YES_NO_OPTION);
+        ProdutoController controller = new ProdutoController();
+        if (controller.ExcluirProduto(pk_produto)) {
+            this.dispose();
+        }
+
+     }//GEN-LAST:event_btExcluirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -247,9 +297,11 @@ public class FRUpPro extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCancelar;
+    private javax.swing.JLabel LabelFotos;
+    private javax.swing.JButton btExcluir;
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton btVoltar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
