@@ -199,7 +199,7 @@ public class FRConsuPro extends javax.swing.JDialog {
     }//GEN-LAST:event_btPesquisaActionPerformed
 
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
-        // TODO add your handling code here:
+        pesquisar();
     }//GEN-LAST:event_cbFiltroActionPerformed
 
     private void btPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btPesquisaMouseClicked

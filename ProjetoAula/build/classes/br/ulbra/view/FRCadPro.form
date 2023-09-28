@@ -62,7 +62,7 @@
                                   </Group>
                                   <EmptySpace pref="61" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel4" min="-2" pref="140" max="-2" attributes="0"/>
+                                      <Component id="LabelFotos" min="-2" pref="140" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                                           <Component id="btEscolherFotos" min="-2" max="-2" attributes="0"/>
@@ -130,7 +130,7 @@
                           <Component id="txtQuantidade" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jLabel4" min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="LabelFotos" min="-2" pref="140" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btEscolherFotos" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -227,8 +227,11 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Escolher Imagem"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btEscolherFotosMouseClicked"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="LabelFotos">
         </Component>
       </SubComponents>
     </Container>

@@ -8,6 +8,11 @@ package br.ulbra.view;
 import br.ulbra.Utils.Utils;
 import br.ulbra.controller.ProdutoController;
 import br.ulbra.controller.UsuarioController;
+import br.ulbra.model.Produto;
+import java.io.File;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,7 +54,7 @@ public class FRCadPro extends javax.swing.JDialog {
         btCancelar = new javax.swing.JButton();
         btSalvar = new javax.swing.JButton();
         btEscolherFotos = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        LabelFotos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("-Cadastro de Produtos-");
@@ -90,6 +95,11 @@ public class FRCadPro extends javax.swing.JDialog {
         });
 
         btEscolherFotos.setText("Escolher Imagem");
+        btEscolherFotos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btEscolherFotosMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,7 +122,7 @@ public class FRCadPro extends javax.swing.JDialog {
                                     .addComponent(jLabel9))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(LabelFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addComponent(btEscolherFotos)))
@@ -163,7 +173,7 @@ public class FRCadPro extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(LabelFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btEscolherFotos)))
                 .addGap(45, 45, 45)
@@ -231,9 +241,16 @@ public class FRCadPro extends javax.swing.JDialog {
         //Salvar
 
         ProdutoController controller = new ProdutoController();
+          Produto pro = new Produto();
+           int quantidade = Integer.parseInt(txtQuantidade.getText());
+          
+         pro.setNomeProduto(txtNomePro.getText());
+         pro.setCategoria(txtCategoriaPro.getText());
+         pro.setFornecedor(txtFornecedor.getText());
+         pro.setQuantEstoque(quantidade);
+         pro.setImagemPro(LabelFotos.getIcon());
 
-        if (controller.adicionarProdutos(txtNomePro.getText(), txtCategoriaPro.getText(), txtFornecedor.getText(),
-                Integer.parseInt(txtQuantidade.getText()))) {
+        if (controller.adicionarProdutos(pro)) {
             this.dispose();
         }
 
@@ -243,6 +260,22 @@ public class FRCadPro extends javax.swing.JDialog {
     private void btCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCancelarMouseClicked
         this.dispose();
     }//GEN-LAST:event_btCancelarMouseClicked
+
+    private void btEscolherFotosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btEscolherFotosMouseClicked
+         JFileChooser fileChooser = new JFileChooser();
+      fileChooser.setDialogTitle("Escolha um arquivo");
+      
+      int returnValue = fileChooser.showOpenDialog(null);
+      
+      if(returnValue == JFileChooser.APPROVE_OPTION) {
+      File arquivo = fileChooser.getSelectedFile();
+       Icon icon = Utils.fileParaIcon(arquivo);
+       
+       ImageIcon iconRedimensionado = Utils.redimensionarIcon(icon,140,140);
+       
+       LabelFotos.setIcon(iconRedimensionado);
+      }
+    }//GEN-LAST:event_btEscolherFotosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -287,13 +320,13 @@ public class FRCadPro extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelFotos;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btEscolherFotos;
     private javax.swing.JButton btSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
