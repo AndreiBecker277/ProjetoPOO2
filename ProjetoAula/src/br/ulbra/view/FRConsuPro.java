@@ -22,6 +22,7 @@ public class FRConsuPro extends javax.swing.JDialog {
     public FRConsuPro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
@@ -43,6 +44,7 @@ public class FRConsuPro extends javax.swing.JDialog {
         tabela = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         cbFiltro = new javax.swing.JComboBox<>();
+        btVoltar = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -100,6 +102,14 @@ public class FRConsuPro extends javax.swing.JDialog {
             }
         });
 
+        btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Voltar.png"))); // NOI18N
+        btVoltar.setText("Voltar");
+        btVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btVoltarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -125,8 +135,13 @@ public class FRConsuPro extends javax.swing.JDialog {
                 .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btVoltar)
+                        .addGap(38, 38, 38))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(74, 74, 74)
@@ -155,12 +170,14 @@ public class FRConsuPro extends javax.swing.JDialog {
                         .addComponent(btPesquisa)
                         .addGap(26, 26, 26)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(btVoltar)
+                .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(167, 167, 167)
                     .addComponent(jLabel4)
-                    .addContainerGap(295, Short.MAX_VALUE)))
+                    .addContainerGap(310, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -171,7 +188,7 @@ public class FRConsuPro extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -214,10 +231,15 @@ public class FRConsuPro extends javax.swing.JDialog {
             );
             FRUpPro telaUPpro = new FRUpPro(null, rootPaneCheckingEnabled);
             telaUPpro.setPk_produto(pk);
+            telaUPpro.carregarProduto();
             telaUPpro.setVisible(true);
         }
                                     
     }//GEN-LAST:event_tabelaMouseClicked
+
+    private void btVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVoltarMouseClicked
+          this.dispose();        
+    }//GEN-LAST:event_btVoltarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -263,6 +285,7 @@ public class FRConsuPro extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btPesquisa;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

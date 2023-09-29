@@ -10,6 +10,10 @@ import br.ulbra.controller.ProdutoController;
 import br.ulbra.controller.UsuarioController;
 import br.ulbra.model.Produto;
 import br.ulbra.model.Usuario;
+import java.io.File;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +34,7 @@ public class FRUpPro extends javax.swing.JDialog {
     public FRUpPro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -53,8 +58,8 @@ public class FRUpPro extends javax.swing.JDialog {
         btSalvar = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
-        LabelFotos = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        lbFotos = new javax.swing.JLabel();
+        btEscolherImagem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("-Alterar Produto-");
@@ -93,8 +98,18 @@ public class FRUpPro extends javax.swing.JDialog {
 
         btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Voltar.png"))); // NOI18N
         btVoltar.setText("Voltar");
+        btVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btVoltarMouseClicked(evt);
+            }
+        });
 
-        jButton1.setText("AlterarImagem");
+        btEscolherImagem.setText("Alterar Imagem");
+        btEscolherImagem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btEscolherImagemMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,11 +126,11 @@ public class FRUpPro extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                                    .addGap(18, 18, 18)
                                     .addComponent(btExcluir))
-                                .addComponent(txtFornecedor, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtFornecedor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                                 .addComponent(txtCategoriaPro, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNomePro, javax.swing.GroupLayout.Alignment.LEADING))
                             .addComponent(jLabel3)
@@ -123,18 +138,18 @@ public class FRUpPro extends javax.swing.JDialog {
                             .addComponent(jLabel6))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(btVoltar)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(LabelFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lbFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(65, 65, 65))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(83, 83, 83))))))))
+                                        .addComponent(btEscolherImagem)
+                                        .addGap(83, 83, 83))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(btVoltar)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +163,7 @@ public class FRUpPro extends javax.swing.JDialog {
                         .addComponent(jLabel2)))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LabelFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbFotos, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(1, 1, 1)
@@ -162,13 +177,13 @@ public class FRUpPro extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(135, 135, 135)
+                    .addComponent(btEscolherImagem))
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSalvar)
                     .addComponent(btExcluir)
                     .addComponent(btVoltar))
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -226,23 +241,24 @@ public class FRUpPro extends javax.swing.JDialog {
         produto.setNomeProduto(txtNomePro.getText());
         produto.setCategoria(txtCategoriaPro.getText());
         produto.setFornecedor(txtFornecedor.getText());
-        produto.setImagemPro(LabelFotos.getIcon());
-        
+        produto.setImagemPro(lbFotos.getIcon());
+
         if (controller.UpdateProduto(produto)) {
             this.dispose();
         }
 
     }//GEN-LAST:event_btSalvarMouseClicked
- public void carregarUsuario(){
-   
-    ProdutoController controller = new ProdutoController();
+    public void carregarProduto() {
+
+        ProdutoController controller = new ProdutoController();
         Produto pro = controller.readForPkPro(pk_produto);
-       
+
         txtNomePro.setText(pro.getNomeProduto());
         txtCategoriaPro.setText(pro.getCategoria());
         txtFornecedor.setText(pro.getFornecedor());
-        
-    }                    
+        lbFotos.setIcon(pro.getImagemPro());
+
+    }
 
     private void btExcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExcluirMouseClicked
         int reposta = JOptionPane.showConfirmDialog(null, "Deseja Excluir Usuario? ",
@@ -253,6 +269,27 @@ public class FRUpPro extends javax.swing.JDialog {
         }
 
      }//GEN-LAST:event_btExcluirMouseClicked
+
+    private void btEscolherImagemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btEscolherImagemMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Escolha um arquivo");
+
+        int returnValue = fileChooser.showOpenDialog(null);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File arquivo = fileChooser.getSelectedFile();
+            Icon icon = Utils.fileParaIcon(arquivo);
+
+            ImageIcon iconRedimensionado = Utils.redimensionarIcon(
+                    icon, 140, 140);
+
+            lbFotos.setIcon(iconRedimensionado);
+        }
+    }//GEN-LAST:event_btEscolherImagemMouseClicked
+
+    private void btVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVoltarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btVoltarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -297,17 +334,17 @@ public class FRUpPro extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelFotos;
+    private javax.swing.JButton btEscolherImagem;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton btVoltar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbFotos;
     private javax.swing.JTextField txtCategoriaPro;
     private javax.swing.JTextField txtFornecedor;
     private javax.swing.JTextField txtNomePro;
