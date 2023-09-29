@@ -22,6 +22,7 @@ public class FRConUsu extends javax.swing.JDialog {
     public FRConUsu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
@@ -100,6 +101,11 @@ public class FRConUsu extends javax.swing.JDialog {
 
         btVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ulbra/img/Voltar.png"))); // NOI18N
         btVoltar.setText("Voltar");
+        btVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btVoltarMouseClicked(evt);
+            }
+        });
 
         cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nome inciando", "Nome contendo", "Email iniciando", "Email contendo" }));
 
@@ -210,6 +216,7 @@ public class FRConUsu extends javax.swing.JDialog {
             );
             FRUpUsu telaUPD = new FRUpUsu(null, rootPaneCheckingEnabled);
             telaUPD.setPkUsuario(pk);
+            telaUPD.carregarUsuario();
             telaUPD.setVisible(true);
         }
     }//GEN-LAST:event_tabelaMouseClicked
@@ -221,6 +228,10 @@ public class FRConUsu extends javax.swing.JDialog {
     private void BtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtPesquisaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtPesquisaActionPerformed
+
+    private void btVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btVoltarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btVoltarMouseClicked
 
     /**
      * @param args the command line arguments
